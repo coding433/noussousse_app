@@ -1,0 +1,111 @@
+﻿> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources
+> Task :app:processDebugGoogleServices UP-TO-DATE
+> Task :app:packageDebugResources
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mergeDebugResources
+> Task :app:mapDebugSourceSetPaths
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:parseDebugLocalResources
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesDebug
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:processDebugResources
+
+> Task :app:compileDebugJavaWithJavac FAILED
+.\gradlew.bat : E:\13_projects
+\21_book_app\1_noussousse_app\
+app\src\main\java\com\applov\n
+oussousse\adapter\BookHorizont
+alAdapter.java:102: error: 
+invalid method declaration; 
+return type required
+At line:1 char:1
++ .\gradlew.bat assembleDebug 
+*>&1 | Out-File -FilePath 
+final_build_che ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~
+    + CategoryInfo          : 
+    NotSpecified: (E:\13_pro  
+  jects\...n type required:   
+ String) [], RemoteExcepti    
+on
+    + FullyQualifiedErrorId : 
+    NativeCommandError
+ 
+        public 
+ViewHolder(@NonNull View 
+itemView) {
+               ^
+E:\13_projects\21_book_app\1_n
+oussousse_app\app\src\main\jav
+a\com\applov\noussousse\adapte
+r\BookHorizontalAdapter.java:1
+10: error: class, interface, 
+or enum expected
+}
+^
+2 errors
+
+[Incubating] Problems report is available at: file:///E:/13_projects/21_book_app/1_noussousse_app/build/reports/problems/problems-report.html
+31 actionable tasks: 8 executed, 23 up-to-date
+FAILURE: Build failed with an 
+exception.
+
+* What went wrong:
+Execution failed for task ':ap
+p:compileDebugJavaWithJavac'.
+> Compilation failed; see the 
+compiler output below.
+  E:\13_projects\21_book_app\1
+_noussousse_app\app\src\main\j
+ava\com\applov\noussousse\adap
+ter\BookHorizontalAdapter.java
+:110: error: class, 
+interface, or enum expected
+  }
+  ^
+  E:\13_projects\21_book_app\1
+_noussousse_app\app\src\main\j
+ava\com\applov\noussousse\adap
+ter\BookHorizontalAdapter.java
+:102: error: invalid method 
+declaration; return type 
+required
+          public 
+ViewHolder(@NonNull View 
+itemView) {
+                 ^
+  2 errors
+
+* Try:
+> Check your code and 
+dependencies to fix the 
+compilation error(s)
+> Run with --scan to get full 
+insights.
+
+BUILD FAILED in 8s

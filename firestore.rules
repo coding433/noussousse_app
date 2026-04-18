@@ -1,0 +1,80 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Books collection - public read, admin write
+    match /books/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Categories collection - public read, admin write
+    match /categories/{document=**} {
+      allow read: if true;
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Orders collection - users can read/write their own, admins can read/write all
+    match /orders/{document=**} {
+      allow read: if request.auth != null && 
+        (request.auth.uid == resource.data.userId || 
+         exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+      allow create, update: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Users collection - users can read/write their own, admins can read/write all
+    match /users/{userId} {
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == userId || 
+         exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+    
+    // Carts collection - users can only access their own cart
+    match /carts/{userId}/items/{cartItem} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Admins collection - allow read for own document, allow write for initial admin creation
+    match /admins/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      // Allow write only if the document doesn't exist (for initial admin creation)
+      // or if the user is already an admin (for updates)
+      allow write: if request.auth != null && request.auth.uid == userId && 
+        (!exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+         exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+    }
+    
+    // Analytics collection - admin only
+    match /analytics/{document=**} {
+      allow read, write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // Notifications collection - admin only
+    match /notifications/{document=**} {
+      allow read, write: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    // ⭐ NEW: Password Reset Requests - allow anyone to create (for forgot password)
+    // Users who forgot password are NOT authenticated, so we allow anonymous creation
+    match /passwordResetRequests/{requestId} {
+      // Allow ANYONE (even unauthenticated) to create a reset request
+      allow create: if true;
+      
+      // Allow users to read their own requests (if authenticated)
+      // Allow admins to read all requests
+      allow read: if request.auth != null && 
+        (resource.data.email == request.auth.token.email || 
+         exists(/databases/$(database)/documents/admins/$(request.auth.uid)));
+      
+      // Only admins can update/delete requests
+      allow update, delete: if request.auth != null && 
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+  }
+}
